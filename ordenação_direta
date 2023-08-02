@@ -1,0 +1,40 @@
+
+
+////////BUSCA EXAUSTIVA////////////
+////////observação: a busca binaria ela só pode ser ordenada se os itens estiverem ordenados/////
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int vetor [10000];
+int i =0;
+int achei =0;
+int busca=0;
+
+
+int main (){
+//iniciialização da memória
+
+for (i=0; i<10000; i++){
+    vetor [i] = (rand()% 10000);
+    }
+
+//perguntar o valor de abusca
+
+    printf("DIGITE o parametro de busca");
+    scanf("%d", &busca);
+    
+//Busca propriamwente dita
+
+    achei=-1;
+    for(i=0;i<10000;i++){
+        if (vetor[i] == busca){
+            achei=i;
+        }
+    }
+    if(achei==-1){
+        printf("Se fodeu !NAO EXISTE!");
+    } else {
+        printf("ACHEI PORRA!!! Na posição %d\n ", achei);
+    }
+}
