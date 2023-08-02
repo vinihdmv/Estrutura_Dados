@@ -1,0 +1,51 @@
+
+
+////////BUSCA BINARIA////////////
+////////observação: a busca binaria ela só pode ser ordenada se os itens estiverem ordenados/////
+
+#include <stdio.h>
+
+
+int vetor [10000];
+int i =0;
+int achei =0;
+int busca=0;
+int inicio=0;
+int fim =0;
+int meio =0;
+
+
+int main (){
+//iniciialização da memória
+
+for (i=0; i<10000; i++){
+    vetor [i] = i;
+    }
+
+//perguntar o valor de abusca
+
+    printf("DIGITE o parametro de busca");
+    scanf("%d", &busca);
+
+//Busca propriamwente dita
+inicio=0;
+fim=9999;
+
+
+achei=-1;
+while(fim>=inicio){
+    meio=((inicio+fim)/2);
+    if(busca==vetor[meio]){
+        achei= meio;
+        printf("ACHEI PORRA Na posiçao %d\n", achei);
+        return 0;
+    }else if (busca>vetor[meio]){
+    inicio= (meio+1);
+    }else{
+        fim =(meio-1);
+    }
+} 
+        printf("Se fodeu! NAO EXISTE");
+    }
+
+
