@@ -1,0 +1,135 @@
+
+
+
+////////////////////////////////////////////////////////
+//////Programa de lista de encadeamento SIMPLES/////////
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+/////declaração da estrutura do nó////////
+
+
+
+struct no{
+    int numero;
+    struct no *proximo;                         //entender este struct//
+};
+
+
+////declarando var///
+struct no *cabeca = NULL;
+
+////func que insere o no na lista/////
+/////////////////////////////////////
+
+
+
+void inserir(int numero){
+    ////alocacao do espaco de memoria////
+    struct no *novoNo =( struct no *)malloc(sizeof(struct no));           /////entender////
+    novoNo -> numero = numero;
+    novoNo -> proximo = NULL;
+
+    if (cabeca==NULL){
+
+        //caso facil, a litsa esta vazia
+        cabeca=novoNo;
+    } else {
+        //caso dificil, a litsa NAO esta vazia
+        struct no *ponteiro = cabeca;
+
+        while (ponteiro -> proximo != NULL){
+            ponteiro = ponteiro -> proximo;
+        }
+        ponteiro -> proximo = novoNo;
+    }
+}
+
+//funcao que imprimi os nos da lista//
+
+
+void imprimir (){
+
+    printf("===================\n");
+
+    struct no * ponteiro = cabeca;
+
+    while (ponteiro != NULL){
+        printf("%d\n", ponteiro -> numero);
+        ponteiro = ponteiro -> proximo;
+        }
+}
+
+
+
+//funcao que exclui////
+ void remover (int numero){
+    if (cabeca != NULL){
+        if (cabeca -> numero == numero ){
+            struct no *ponteiroExcluir = cabeca;
+            cabeca = cabeca -> proximo;
+            free (ponteiroExcluir);
+
+        }else{
+            //caso dificil,excluir algum no meio da lista
+            struct no *ponteiroAnterior = cabeca;
+
+            while ((ponteiroAnterior -> proximo != NULL) && (ponteiroAnterior -> proximo -> numero != numero)){
+                ponteiroAnterior = ponteiroAnterior -> proximo;
+            }
+
+            if(ponteiroAnterior -> proximo != NULL){
+                struct no *ponteiroExluir = ponteiroAnterior -> proximo;
+                ponteiroAnterior -> proximo = ponteiroExluir -> proximo;
+                free(ponteiroExluir);
+            }
+        }
+    }
+ }
+
+
+
+
+//func principal de execucao do programa//
+
+int main (int argc, char *argv []){
+
+    int opcao = 0;
+    int numero=0;
+
+    while (opcao != 4){
+    printf("================\n");
+    printf("MENU DE OPCAO\n");
+    printf("================\n");
+    printf("1- INSERIR\n");
+    printf("2-REMOVER\n");
+    printf("3-IMPRIMIR\n");
+    printf("4-SAIR\n");
+
+    printf("================\n");
+    printf("DIGITE OPCAO:  \n");
+    scanf("%d", &opcao);
+
+
+    switch (opcao) {
+    case 1:
+        printf("digite o num:");
+        scanf("%d", &numero);
+        inserir(numero);
+        break;
+
+    case 2:
+        printf("digite o num:");
+        scanf("%d", &numero);
+        remover(numero);
+
+        break;
+    case 3:
+        imprimir();
+        break;
+
+        }
+    }
+}
