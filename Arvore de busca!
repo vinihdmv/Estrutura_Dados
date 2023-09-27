@@ -1,0 +1,155 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+/////////////programa que Implementa uma Arvore de Busca////////
+////////////////////////////////////////////////////////////////
+
+////////////declaracao de estruturas///////
+
+
+struct no {
+    int numero;
+    struct no *esquerda;
+    struct no *direita;
+
+};
+
+/////////////////////////////////////
+//funcao que insere um no na arvore/
+
+
+
+
+struct no *inserir(struct no *raiz, int numero){
+    if(raiz==NULL){
+
+    raiz=(struct no*)malloc(sizeof(struct no));
+    raiz -> numero = numero;
+    raiz-> esquerda = NULL;
+    raiz -> direita = NULL;
+    }else{
+        if (numero < raiz -> numero){
+            raiz -> esquerda = inserir(raiz->esquerda,numero);
+        }else if(numero>raiz->numero){
+            raiz->direita = inserir(raiz->direita,numero);
+        }
+
+    }
+    return raiz;
+}
+
+/////////////////////////////////////
+///func que busca um no na arvore////
+/////////////////////////////////////
+
+void buscar(struct no *raiz,int numero){
+
+    if(raiz == NULL){
+        printf("NÃO ACHEIU!! ELA NAO EXIOSTE");
+
+    }else if(raiz-> numero == numero){
+        printf( "ACHEI PORRA!!");
+    }else if(numero<raiz -> numero){
+        buscar(raiz->esquerda,numero);
+    } else{
+        buscar(raiz->direita,numero);
+    }
+}
+
+/////////////////////////////////////////
+////func que navega a arvore em ordem////
+/////////////////////////////////////////
+void navegar (struct no *raiz){
+
+    if (raiz!=NULL){
+        navegar(raiz ->esquerda);
+        printf("%d\t",raiz->numero);
+        navegar(raiz->direita);
+    }
+}
+
+
+///////////////////////////////////////
+//func que desenha ukm n eu na tela///
+
+
+int menu(){
+
+    int opcao;
+
+    printf("\n");
+    printf("====================================================\n");
+    printf("|             Menu de OPCAO                         \n");
+    printf("=====================================================\n");
+    printf("|       1-inserir                                   \n");
+    printf("|      2-busca                                      \n");
+    printf("|       3-Navegar                                    \n");
+    printf("|      4-Constrir Arvore aleatoriamente             \n");
+    printf("|       5-sair                                      \n");
+    printf("===================================================\n");
+    printf("digite sua opcao");
+    scanf("%d",&opcao);
+
+
+    return opcao;
+}
+
+
+//////////FUNC DE EXECUCAO DO PROGRAMA////
+
+int main(){
+///declarar var
+    struct no *raiz = NULL;
+    int opcao = 0;
+    int numero =0;
+    int i =0;
+
+//inicializaxao da aleatoriedade///
+    time_t t;
+    srand((unsigned)time(&t));
+///manipoulacao da arvore
+    while (opcao != 5){
+        opcao = menu();
+
+        switch (opcao){
+
+
+    case 1:
+        printf("DIgite O numero");
+        scanf("%d", &numero);
+
+        raiz = inserir(raiz,numero);
+
+        break;
+
+
+    case 2:
+
+        printf("DIgite O numero");
+        scanf("%d", &numero);
+
+        buscar(raiz,numero);
+
+
+        break;
+
+
+    case 3:
+        navegar(raiz);
+
+        break;
+
+
+
+    case 4:
+        for(i=0; i<100; i++){
+            raiz = inserir(raiz,rand());
+        }
+
+        break;
+
+        }
+    }
+}
