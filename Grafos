@@ -1,0 +1,112 @@
+
+#include <time.h>
+#include <stdio.h>
+
+
+/////////////////////////////////////////
+////Program que implementa um Grafo//////
+/////////////////////////////////////////
+
+
+////definicao de constantes////
+
+const int TAMANHO =10000;
+
+/////funcoes que cria um grafo///////
+
+void criar(int grafo [TAMANHO][TAMANHO], int aleatorio){
+
+
+int i =0;
+int j=0;
+
+int amigo=0;
+
+    //inicializacao do grafo
+    for(i=0;i<TAMANHO;i++){
+        for(j=0;j<TAMANHO;j++){
+            grafo[i][j]=0;
+        }
+    }
+    ////definicao das conexoes do grafo
+    for(i=0;i<(TAMANHO-1);i++){
+        for(j=(i+1);j<TAMANHO;j++){
+            if(! aleatorio) {
+                printf("Digite <1> caso %d seja amigo de %d:",i,j);
+                scanf("%d",&amigo);
+            } else {
+                amigo = (rand() % 2);
+            }
+            grafo[i][j]=amigo;
+            grafo[j][i]=amigo;
+        }
+    }
+}
+
+
+void imprimir(int grafo[TAMANHO][TAMANHO]){
+
+int i =0;
+int j=0;
+
+int amigo=0;
+
+    //inicializacao do grafo
+    for(i=0;i<TAMANHO;i++){
+        for(j=0;j<TAMANHO;j++){
+            printf("%d\t",grafo[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+////////////////funcoes que descobre o vertuicew de mauior grau!/////////
+
+
+int descobrirVerticeMiorGrau(int grafo[TAMANHO][TAMANHO]){
+    int i=0;
+    int j=0;
+
+    int contador=0;
+    int maior=0;
+    int vertice=0;
+
+
+    //navegacao do grafo
+
+    for(i=0;i<TAMANHO;i++){
+        contador=0;
+        for(j=0;j<TAMANHO;j++){
+            if(grafo[i][j]){
+                contador++;
+            }
+        }
+        if(contador > maior){
+            maior=contador;
+            vertice=i;
+        }
+    }
+
+
+    //retorno
+    return vertice;
+
+}
+
+
+//func princi8pál////
+
+int main(){
+        time_t t;
+        srand((unsigned) time(&t));
+        int grafo[TAMANHO][TAMANHO];
+
+        criar(grafo, 1);
+
+        imprimir(grafo);
+
+        printf("Vertice mais popular: %d\n", descobrirVerticeMiorGrau(grafo));
+
+
+}
+
